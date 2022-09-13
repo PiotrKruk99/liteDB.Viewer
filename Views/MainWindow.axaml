@@ -21,6 +21,7 @@
                     <Separator/>
                     <MenuItem Header="E_xit" Command="{Binding OnExitClick}"/>
                 </MenuItem>
+                <MenuItem Header="TestButton" Click="OnTestButtonClick"/>
             </Menu>
 
             <StackPanel Orientation="Horizontal">

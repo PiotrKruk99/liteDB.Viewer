@@ -9,7 +9,7 @@ using LiteDBViewer.Models;
 
 namespace LiteDBViewer.Views
 {
-    public partial class MainWindow : Window
+    public class MainWindow : Window
     {
         private TextBlock testOutputTB;
         private ComboBox tableNamesCB;
@@ -112,6 +112,17 @@ namespace LiteDBViewer.Views
         {
             //this.Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Colors.Aqua);
             FillTableOutputDG((tableNamesCB.SelectedItem as string)!);
+        }
+    
+        public async void OnTestButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.Background = Avalonia.Media.Brushes.LightBlue;
+
+            var dialog = new PasswordWindow();
+            string? result = await dialog.ShowDialog<string?>(this);
+
+            if (result != null)
+                testOutputTB.Text = result;
         }
     }
 }
