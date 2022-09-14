@@ -17,6 +17,7 @@
             <Menu>
                 <MenuItem Header="_File">
                     <MenuItem Header="_Open database" Click="OnOpenClick"/>
+                    <MenuItem Header="Open database with _password" Click="OnOpenWithPasswordClick"/>
                     <MenuItem Header="_Close database" Click="OnCloseClick"/>
                     <Separator/>
                     <MenuItem Header="E_xit" Command="{Binding OnExitClick}"/>

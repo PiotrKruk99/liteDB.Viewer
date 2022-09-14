@@ -1,3 +1,4 @@
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
@@ -18,6 +19,11 @@ namespace LiteDBViewer.Views
             #endif
 
             passwordTB = this.FindControl<TextBox>("passwordTB");
+        }
+
+        protected override void OnOpened(EventArgs e)
+        {
+            this.FindControl<TextBox>("passwordTB").Focus();
         }
 
         public void OnOKClick(object sender, RoutedEventArgs e)

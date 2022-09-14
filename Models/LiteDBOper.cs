@@ -36,7 +36,7 @@ public static class LiteDBOper
         return;
     }
 
-    public static void OpenLDB(string filePath, string password = "")
+    public static void OpenLDB(string filePath, string password)
     {
         if (!File.Exists(filePath))
         {

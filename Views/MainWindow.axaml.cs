@@ -83,9 +83,40 @@ namespace LiteDBViewer.Views
 
             var filePath = await openDialog.ShowAsync(this);
 
-            if (filePath != null)
+            if (filePath != null && filePath.Length > 0)
             {
                 LiteDBOper.OpenLDB(filePath[0]);
+            }
+
+            var tablesNames = LiteDBOper.GetTablesNames();
+
+            tableNamesCB.Items = tablesNames;
+
+            if (tableNamesCB.ItemCount > 0)
+            {
+                tableNamesCB.SelectedIndex = 0;
+            }
+        }
+
+        public async void OnOpenWithPasswordClick(object sender, RoutedEventArgs e)
+        {
+            //this.Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Colors.Aqua);
+
+            var openDialog = new OpenFileDialog()
+            {
+                AllowMultiple = false,
+                Title = "database file openning"
+            };
+
+            var filePath = await openDialog.ShowAsync(this);
+
+            if (filePath != null && filePath.Length > 0)
+            {
+                var dialog = new PasswordWindow();
+                string? password = await dialog.ShowDialog<string?>(this);
+
+                if (password != null)
+                    LiteDBOper.OpenLDB(filePath[0], password);
             }
 
             var tablesNames = LiteDBOper.GetTablesNames();
@@ -113,7 +144,7 @@ namespace LiteDBViewer.Views
             //this.Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Colors.Aqua);
             FillTableOutputDG((tableNamesCB.SelectedItem as string)!);
         }
-    
+
         public async void OnTestButtonClick(object sender, RoutedEventArgs e)
         {
             this.Background = Avalonia.Media.Brushes.LightBlue;
