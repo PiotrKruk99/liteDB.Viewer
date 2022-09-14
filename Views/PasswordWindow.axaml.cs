@@ -34,6 +34,7 @@ namespace LiteDBViewer.Views
         public void OnCancelClick(object sender, RoutedEventArgs e)
         {
             Close(null);
+            //var ble = new Avalonia.Input.KeyGesture(Avalonia.Input.Key.)
         }
     }
 }

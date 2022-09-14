@@ -147,7 +147,7 @@ namespace LiteDBViewer.Views
 
         public async void OnTestButtonClick(object sender, RoutedEventArgs e)
         {
-            this.Background = Avalonia.Media.Brushes.LightBlue;
+            //this.Background = Avalonia.Media.Brushes.LightBlue;
 
             var dialog = new PasswordWindow();
             string? result = await dialog.ShowDialog<string?>(this);
