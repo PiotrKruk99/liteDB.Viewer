@@ -26,15 +26,14 @@ namespace LiteDBViewer.Views
             this.FindControl<TextBox>("passwordTB").Focus();
         }
 
-        public void OnOKClick(object sender, RoutedEventArgs e)
+        public void OnOKClick()
         {
             Close(passwordTB.Text);
         }
 
-        public void OnCancelClick(object sender, RoutedEventArgs e)
+        public void OnCancelClick()
         {
             Close(null);
-            //var ble = new Avalonia.Input.KeyGesture(Avalonia.Input.Key.)
         }
     }
 }
