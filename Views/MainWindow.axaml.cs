@@ -14,6 +14,8 @@ namespace LiteDBViewer.Views
         private TextBlock testOutputTB;
         private ComboBox tableNamesCB;
         private DataGrid tableOutputDG;
+        private CheckBox lightMode;
+        private CheckBox darkMode;
 
         public MainWindow()
         {
@@ -26,6 +28,8 @@ namespace LiteDBViewer.Views
             testOutputTB = this.FindControl<TextBlock>("testOutputTB");
             tableNamesCB = this.FindControl<ComboBox>("tableNamesCB");
             tableOutputDG = this.FindControl<DataGrid>("tableOutputDG");
+            lightMode = this.FindControl<CheckBox>("lightMode");
+            darkMode = this.FindControl<CheckBox>("darkMode");
         }
 
         private void FillTableOutputDG(string tableName)
@@ -154,6 +158,25 @@ namespace LiteDBViewer.Views
 
             if (result != null)
                 testOutputTB.Text = result;
+        }
+    
+        public void ChangeMode(string mode)
+        {
+            switch (mode)
+            {
+                case "light":
+                    (App.Current!.Styles[0] as Avalonia.Themes.Fluent.FluentTheme)!.Mode = Avalonia.Themes.Fluent.FluentThemeMode.Light;
+                    lightMode.IsChecked = true;
+                    darkMode.IsChecked = false;
+                    tableOutputDG.AlternatingRowBackground = Avalonia.Media.Brushes.LightGray;
+                    break;
+                case "dark":
+                    (App.Current!.Styles[0] as Avalonia.Themes.Fluent.FluentTheme)!.Mode = Avalonia.Themes.Fluent.FluentThemeMode.Dark;
+                    lightMode.IsChecked = false;
+                    darkMode.IsChecked = true;
+                    tableOutputDG.AlternatingRowBackground = Avalonia.Media.Brushes.Gray;
+                    break;
+            }
         }
     }
 }
