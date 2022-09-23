@@ -37,7 +37,7 @@
                 <MenuItem Header="TestButton" Click="OnTestButtonClick"/>
             </Menu>
 
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Margin="3">
                 <Label Content="table name:" VerticalAlignment="Center"/>
                 <ComboBox Name="tableNamesCB" Width="150" SelectionChanged="OnSelectionChanged"/>
             </StackPanel>
@@ -45,7 +45,8 @@
             <TextBlock Name="testOutputTB"/>
         </StackPanel>
 
-        <DataGrid Name="tableOutputDG" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="LightGray" DockPanel.Dock="Bottom"/>
+        <DataGrid Name="tableOutputDG" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="LightGray" 
+                DockPanel.Dock="Bottom" CanUserResizeColumns="True" Margin="3"/>
     </DockPanel>
 
 </Window>

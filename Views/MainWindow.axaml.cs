@@ -5,6 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Interactivity;
 using Avalonia.Data;
+using Avalonia.Themes.Fluent;
 using LiteDBViewer.Models;
 
 namespace LiteDBViewer.Views
@@ -63,7 +64,7 @@ namespace LiteDBViewer.Views
 
                 for (var i = 0; i < cols.Count; i++)
                 {
-                    tableOutputDG.Columns.Add(new DataGridTextColumn
+                    tableOutputDG.Columns.Add(new DataGridTextColumn()
                     {
                         Header = cols[i].ColumnName,
                         Binding = new Binding($"Row.ItemArray[{i}]"),
@@ -77,8 +78,6 @@ namespace LiteDBViewer.Views
 
         public async void OnOpenClick(object sender, RoutedEventArgs e)
         {
-            //this.Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Colors.Aqua);
-
             var openDialog = new OpenFileDialog()
             {
                 AllowMultiple = false,
@@ -165,13 +164,13 @@ namespace LiteDBViewer.Views
             switch (mode)
             {
                 case "light":
-                    (App.Current!.Styles[0] as Avalonia.Themes.Fluent.FluentTheme)!.Mode = Avalonia.Themes.Fluent.FluentThemeMode.Light;
+                    (App.Current!.Styles[0] as FluentTheme)!.Mode = FluentThemeMode.Light;
                     lightMode.IsChecked = true;
                     darkMode.IsChecked = false;
                     tableOutputDG.AlternatingRowBackground = Avalonia.Media.Brushes.LightGray;
                     break;
                 case "dark":
-                    (App.Current!.Styles[0] as Avalonia.Themes.Fluent.FluentTheme)!.Mode = Avalonia.Themes.Fluent.FluentThemeMode.Dark;
+                    (App.Current!.Styles[0] as FluentTheme)!.Mode = Avalonia.Themes.Fluent.FluentThemeMode.Dark;
                     lightMode.IsChecked = false;
                     darkMode.IsChecked = true;
                     tableOutputDG.AlternatingRowBackground = Avalonia.Media.Brushes.Gray;
