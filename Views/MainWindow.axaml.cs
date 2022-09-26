@@ -16,8 +16,8 @@ namespace LiteDBViewer.Views
         private TextBlock testOutputTB;
         private ComboBox tableNamesCB;
         private DataGrid tableOutputDG;
-        private CheckBox lightMode;
-        private CheckBox darkMode;
+        private RadioButton lightMode;
+        private RadioButton darkMode;
 
         public MainWindow()
         {
@@ -30,8 +30,8 @@ namespace LiteDBViewer.Views
             testOutputTB = this.FindControl<TextBlock>("testOutputTB")!;
             tableNamesCB = this.FindControl<ComboBox>("tableNamesCB")!;
             tableOutputDG = this.FindControl<DataGrid>("tableOutputDG")!;
-            lightMode = this.FindControl<CheckBox>("lightMode")!;
-            darkMode = this.FindControl<CheckBox>("darkMode")!;
+            lightMode = this.FindControl<RadioButton>("lightMode")!;
+            darkMode = this.FindControl<RadioButton>("darkMode")!;
         }
 
         private void FillTableOutputDG(string tableName)
@@ -117,7 +117,10 @@ namespace LiteDBViewer.Views
             if (filePath != null && filePath.Length > 0)
             {
                 var dialog = new PasswordWindow();
+                dialog.FontSize = this.FontSize;
+                this.IsEnabled = false;
                 string? password = await dialog.ShowDialog<string?>(this);
+                this.IsEnabled = true;
 
                 if (password != null)
                     LiteDBOper.OpenLDB(filePath[0], password);
@@ -154,7 +157,10 @@ namespace LiteDBViewer.Views
             //this.Background = Avalonia.Media.Brushes.LightBlue;
 
             var dialog = new PasswordWindow();
+            dialog.FontSize = this.FontSize;
+            this.IsEnabled = false;
             string? result = await dialog.ShowDialog<string?>(this);
+            this.IsEnabled = true;
 
             if (result != null)
                 testOutputTB.Text = result;

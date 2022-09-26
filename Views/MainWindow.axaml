@@ -3,7 +3,8 @@
         xmlns:vm="using:LiteDBViewer.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+        Width="800" Height="600" FontSize="14"
         x:Class="LiteDBViewer.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="LiteDB Viewer">
@@ -11,6 +12,15 @@
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
+
+    <Window.Styles>
+        <Style Selector="Label, ComboBox, DataGrid">
+            <Setter Property="Margin" Value="0 3 0 0"/>
+        </Style>
+        <Style Selector="DockPanel">
+            <Setter Property="Margin" Value="5 3"/>
+        </Style>
+    </Window.Styles>
 
     <DockPanel LastChildFill="True">
         <StackPanel DockPanel.Dock="Top">
@@ -25,19 +35,20 @@
                 <MenuItem Header="_View">
                     <MenuItem Header="light mode" Command="{Binding $parent[Window].ChangeMode}" CommandParameter="light">
                         <MenuItem.Icon>
-                            <CheckBox Name="lightMode" IsChecked="True"/>
+                            <!-- <CheckBox Name="lightMode" IsChecked="True"/> -->
+                            <RadioButton Name="lightMode" IsChecked="True"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="dark mode" Command="{Binding $parent[Window].ChangeMode}" CommandParameter="dark">
                         <MenuItem.Icon>
-                            <CheckBox Name="darkMode" IsChecked="False"/>
+                            <RadioButton Name="darkMode" IsChecked="False"/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="TestButton" Click="OnTestButtonClick"/>
             </Menu>
 
-            <StackPanel Orientation="Horizontal" Margin="3">
+            <StackPanel Orientation="Horizontal">
                 <Label Content="table name:" VerticalAlignment="Center"/>
                 <ComboBox Name="tableNamesCB" Width="150" SelectionChanged="OnSelectionChanged"/>
             </StackPanel>
@@ -46,7 +57,7 @@
         </StackPanel>
 
         <DataGrid Name="tableOutputDG" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="LightGray" 
-                DockPanel.Dock="Bottom" CanUserResizeColumns="True" Margin="3"/>
+                DockPanel.Dock="Bottom" CanUserResizeColumns="True"/>
     </DockPanel>
 
 </Window>
