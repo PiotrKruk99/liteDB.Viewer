@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using Avalonia;
@@ -5,7 +6,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Interactivity;
 using Avalonia.Data;
-using Avalonia.Themes.Fluent;
+using Avalonia.Themes.Simple;
 using LiteDBViewer.Models;
 
 namespace LiteDBViewer.Views
@@ -15,8 +16,8 @@ namespace LiteDBViewer.Views
         private TextBlock testOutputTB;
         private ComboBox tableNamesCB;
         private DataGrid tableOutputDG;
-        private CheckBox lightMode;
-        private CheckBox darkMode;
+        private RadioButton lightMode;
+        private RadioButton darkMode;
 
         public MainWindow()
         {
@@ -26,11 +27,11 @@ namespace LiteDBViewer.Views
             this.AttachDevTools();
 #endif
 
-            testOutputTB = this.FindControl<TextBlock>("testOutputTB");
-            tableNamesCB = this.FindControl<ComboBox>("tableNamesCB");
-            tableOutputDG = this.FindControl<DataGrid>("tableOutputDG");
-            lightMode = this.FindControl<CheckBox>("lightMode");
-            darkMode = this.FindControl<CheckBox>("darkMode");
+            testOutputTB = this.FindControl<TextBlock>("testOutputTB")!;
+            tableNamesCB = this.FindControl<ComboBox>("tableNamesCB")!;
+            tableOutputDG = this.FindControl<DataGrid>("tableOutputDG")!;
+            lightMode = this.FindControl<RadioButton>("lightMode")!;
+            darkMode = this.FindControl<RadioButton>("darkMode")!;
         }
 
         private void FillTableOutputDG(string tableName)
@@ -116,7 +117,10 @@ namespace LiteDBViewer.Views
             if (filePath != null && filePath.Length > 0)
             {
                 var dialog = new PasswordWindow();
+                dialog.FontSize = this.FontSize;
+                this.IsEnabled = false;
                 string? password = await dialog.ShowDialog<string?>(this);
+                this.IsEnabled = true;
 
                 if (password != null)
                     LiteDBOper.OpenLDB(filePath[0], password);
@@ -153,24 +157,27 @@ namespace LiteDBViewer.Views
             //this.Background = Avalonia.Media.Brushes.LightBlue;
 
             var dialog = new PasswordWindow();
+            dialog.FontSize = this.FontSize;
+            this.IsEnabled = false;
             string? result = await dialog.ShowDialog<string?>(this);
+            this.IsEnabled = true;
 
             if (result != null)
                 testOutputTB.Text = result;
         }
-    
+
         public void ChangeMode(string mode)
         {
             switch (mode)
             {
                 case "light":
-                    (App.Current!.Styles[0] as FluentTheme)!.Mode = FluentThemeMode.Light;
+                    (App.Current!.Styles[0] as SimpleTheme)!.Mode = SimpleThemeMode.Light;
                     lightMode.IsChecked = true;
                     darkMode.IsChecked = false;
                     tableOutputDG.AlternatingRowBackground = Avalonia.Media.Brushes.LightGray;
                     break;
                 case "dark":
-                    (App.Current!.Styles[0] as FluentTheme)!.Mode = Avalonia.Themes.Fluent.FluentThemeMode.Dark;
+                    (App.Current!.Styles[0] as SimpleTheme)!.Mode = SimpleThemeMode.Dark;
                     lightMode.IsChecked = false;
                     darkMode.IsChecked = true;
                     tableOutputDG.AlternatingRowBackground = Avalonia.Media.Brushes.Gray;

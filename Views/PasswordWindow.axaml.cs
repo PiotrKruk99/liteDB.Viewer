@@ -14,26 +14,26 @@ namespace LiteDBViewer.Views
         {
             AvaloniaXamlLoader.Load(this);
 
-            #if DEBUG
+#if DEBUG
             this.AttachDevTools();
-            #endif
+#endif
 
-            passwordTB = this.FindControl<TextBox>("passwordTB");
+            passwordTB = this.FindControl<TextBox>("passwordTB")!;
         }
 
         protected override void OnOpened(EventArgs e)
         {
-            this.FindControl<TextBox>("passwordTB").Focus();
+            this.FindControl<TextBox>("passwordTB")!.Focus();
         }
 
         public void OnOKClick()
         {
-            Close(passwordTB.Text);
+            Close(passwordTB.Text!);
         }
 
         public void OnCancelClick()
         {
-            Close(null);
+            Close();
         }
     }
 }
