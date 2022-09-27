@@ -148,7 +148,6 @@ namespace LiteDBViewer.Views
 
         public void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //this.Background = new Avalonia.Media.SolidColorBrush(Avalonia.Media.Colors.Aqua);
             FillTableOutputDG((tableNamesCB.SelectedItem as string)!);
         }
 
@@ -183,6 +182,21 @@ namespace LiteDBViewer.Views
                     tableOutputDG.AlternatingRowBackground = Avalonia.Media.Brushes.Gray;
                     break;
             }
+        }
+
+        public void ShortColumns()
+        {
+            tableOutputDG.MaxColumnWidth = 200;
+        }
+
+        public void LongColumns()
+        {
+            tableOutputDG.MaxColumnWidth = double.PositiveInfinity;
+        }
+    
+        public void ChangeFontSize(int size)
+        {
+            this.FontSize = size;
         }
     }
 }

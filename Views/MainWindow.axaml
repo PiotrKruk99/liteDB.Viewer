@@ -36,13 +36,24 @@
                     <MenuItem Header="light mode" Command="{Binding $parent[Window].ChangeMode}" CommandParameter="light">
                         <MenuItem.Icon>
                             <!-- <CheckBox Name="lightMode" IsChecked="True"/> -->
-                            <RadioButton Name="lightMode" IsChecked="True"/>
+                            <RadioButton Name="lightMode" IsChecked="True" Command="{Binding $parent[Window].ChangeMode}" CommandParameter="light"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="dark mode" Command="{Binding $parent[Window].ChangeMode}" CommandParameter="dark">
                         <MenuItem.Icon>
-                            <RadioButton Name="darkMode" IsChecked="False"/>
+                            <RadioButton Name="darkMode" IsChecked="False" Command="{Binding $parent[Window].ChangeMode}" CommandParameter="dark"/>
                         </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Short columns style" Command="{Binding $parent[Window].ShortColumns}"/>
+                    <MenuItem Header="Infinity columns style" Command="{Binding $parent[Window].LongColumns}"/>
+                    <Separator/>
+                    <MenuItem Header="Font size">
+                        <MenuItem Header="10" Command="{Binding $parent[Window].ChangeFontSize}" CommandParameter="10"/>
+                        <MenuItem Header="12" Command="{Binding $parent[Window].ChangeFontSize}" CommandParameter="12"/>
+                        <MenuItem Header="14*" Command="{Binding $parent[Window].ChangeFontSize}" CommandParameter="14"/>
+                        <MenuItem Header="16" Command="{Binding $parent[Window].ChangeFontSize}" CommandParameter="16"/>
+                        <MenuItem Header="18" Command="{Binding $parent[Window].ChangeFontSize}" CommandParameter="18"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="TestButton" Click="OnTestButtonClick"/>
@@ -57,7 +68,7 @@
         </StackPanel>
 
         <DataGrid Name="tableOutputDG" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="LightGray" 
-                DockPanel.Dock="Bottom" CanUserResizeColumns="True"/>
+                DockPanel.Dock="Bottom" CanUserResizeColumns="True" GridLinesVisibility="All"/>
     </DockPanel>
 
 </Window>
