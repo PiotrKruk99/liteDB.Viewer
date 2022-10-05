@@ -12,7 +12,7 @@ public class DynamicRow : IList, ITypedList
 {
     private ArrayList row;
 
-    DynamicRow()
+    public DynamicRow()
     {
         row = new();
     }
